@@ -39,7 +39,7 @@ const Dashboard = () => {
       setError("")
 
       // Fetch customers sorted by most recent first
-      const response = await fetch(`${process.env.BACKEND_URL}/api/customer?sort=-createdAt`)
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customer?sort=-createdAt`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -97,7 +97,7 @@ const Dashboard = () => {
 
     try {
       setIsDeleting(true)
-      const response = await fetch(`${process.env.BACKEND_URL}/api/customers/${customerToDelete._id}`, {
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customers/${customerToDelete._id}`, {
         method: "DELETE",
       })
 
@@ -182,7 +182,7 @@ const Dashboard = () => {
         date: editFormData.date,
       }
 
-      const response = await fetch(`${process.env.BACKEND_URL}/api/customer/${editingCustomer._id}`, {
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customer/${editingCustomer._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
