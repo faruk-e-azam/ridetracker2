@@ -89,7 +89,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/api/auth/register`, {
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
