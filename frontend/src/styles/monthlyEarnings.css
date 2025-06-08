@@ -1,0 +1,272 @@
+.monthly-earnings-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.earnings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.earnings-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.earnings-header p {
+  color: #4a5568;
+  font-size: 1.125rem;
+}
+
+.earnings-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.year-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.year-select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.yearly-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.yearly-stat-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.yearly-stat-card .stat-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.yearly-stat-card .stat-number {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.yearly-stat-card .stat-number.income {
+  color: #38a169;
+}
+
+.yearly-stat-card .stat-number.cost {
+  color: #e53e3e;
+}
+
+.yearly-stat-card .stat-number.profit {
+  color: #3182ce;
+}
+
+.yearly-stat-card .stat-number.save {
+  color: #3182ce;
+}
+
+.stat-year {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.monthly-breakdown {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.breakdown-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.breakdown-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.no-data {
+  text-align: center;
+  padding: 3rem;
+}
+
+.no-data-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.no-data h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.no-data p {
+  color: #4a5568;
+}
+
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.month-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.month-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.month-year {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.month-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.month-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-stat.total {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.month-stat.total .stat-label {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.stat-value {
+  font-weight: 500;
+}
+
+.stat-value.income {
+  color: #38a169;
+}
+
+.stat-value.cost {
+  color: #e53e3e;
+}
+
+.stat-value.profit {
+  color: #3182ce;
+  font-weight: bold;
+}
+
+.protected-route-info {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.protected-route-info h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.protected-route-info p {
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #2c5282;
+}
+
+@media (max-width: 768px) {
+  .monthly-earnings-container {
+    padding: 1rem;
+  }
+
+  .earnings-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .earnings-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .yearly-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monthly-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
