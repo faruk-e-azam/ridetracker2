@@ -35,7 +35,7 @@ const MonthlyEarnings = () => {
       setLoading(true)
       setError("")
 
-      const response = await fetch(`${process.env.BACKEND_URL}/api/customer`)
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customer`)
       if (!response.ok) {
         throw new Error("Failed to fetch customer data")
       }
