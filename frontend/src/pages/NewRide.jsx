@@ -121,7 +121,7 @@ const NewRide = () => {
         date: formData.date,
       }
 
-      const response = await fetch(`${process.env.BACKEND_URL}/api/customer`, {
+      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(submitData),
