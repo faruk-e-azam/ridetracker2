@@ -17,6 +17,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.options('*', cors());
+
 // MongoDB connection string
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/customer_dashboard"
 
