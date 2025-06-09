@@ -606,11 +606,13 @@ app.use("*", (req, res) => {
 
 // Initialize default users and start server
 initializeDefaultUsers().then(() => {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, "0.0.0.0" () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`)
     console.log(`💾 Database: MongoDB (${MONGODB_URI})`)
     console.log("🔗 Test the API: http://localhost:5000/health")
     console.log("🔐 Authentication endpoints added!")
     console.log("👤 Default users created (check console for credentials)")
   })
+  server.keepAliveTimeout = 120000
+  server.headersTimeout = 120000
 })
