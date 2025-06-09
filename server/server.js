@@ -12,12 +12,12 @@ const PORT = 5000
 app.use(cors())
 app.use(express.json())
 
-app.use(cors({
-  origin: "https://unique-concha-7608a6.netlify.app", // or '*' for public
-  credentials: true, // if you're using cookies/auth headers
-}))
+// app.use(cors({
+//   origin: "https://unique-concha-7608a6.netlify.app", // or '*' for public
+//   credentials: true, // if you're using cookies/auth headers
+// }))
 
-app.options("*", cors())
+// app.options("*", cors())
 // MongoDB connection string
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/customer_dashboard"
 

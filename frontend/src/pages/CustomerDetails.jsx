@@ -20,7 +20,7 @@ const CustomerDetails = () => {
       setLoading(true)
       setError("")
 
-      const response = await fetch(`https://ridetracker2backend.onrender.com/api/customer`)
+      const response = await fetch(`http://localhost:5000/api/customer`)
       if (!response.ok) {
         throw new Error("Failed to fetch customer data")
       }
@@ -81,7 +81,7 @@ const CustomerDetails = () => {
     setIsModalOpen(false)
     setSelectedCustomer(null)
   }
-
+  console.log(process.env.LOCAL_BACKEND)
   const handleQuickRide = (customer) => {
     // Parse the location to extract from and to locations
     const locationParts = customer.location.split(" → ")
