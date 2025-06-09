@@ -606,7 +606,7 @@ app.use("*", (req, res) => {
 
 // Initialize default users and start server
 initializeDefaultUsers().then(() => {
-  const server = app.listen(PORT, "0.0.0.0" () => {
+  const server = app.listen(PORT, "44.226.145.213" () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`)
     console.log(`💾 Database: MongoDB (${MONGODB_URI})`)
     console.log("🔗 Test the API: http://localhost:5000/health")
