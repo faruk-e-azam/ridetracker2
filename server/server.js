@@ -13,24 +13,26 @@ app.use(cors())
 app.use(express.json())
 
 app.use(cors({
-  origin: 'https://unique-concha-7608a6.netlify.app',
-  credentials: true,
-}));
+  origin: "https://unique-concha-7608a6.netlify.app", // or '*' for public
+  credentials: true, // if you're using cookies/auth headers
+}))
 
-
+app.options("*", cors())
 // MongoDB connection string
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/customer_dashboard"
 
 // Connect to MongoDB - using the new connection approach
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then( async () => console.log("✅ Connected to MongoDB successfully"
-        await initializeDefaultUsers()
-  ))
+  .then(async () => {
+    console.log("✅ Connected to MongoDB successfully")
+    await initializeDefaultUsers()
+  })
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err)
     process.exit(1)
   })
+  
 
 // JWT Secret
 const JWT_SECRET = process.env.JWT_SECRET || "your-super-secret-jwt-key-change-this-in-production"
@@ -606,15 +608,34 @@ app.use("*", (req, res) => {
   res.status(404).json({ message: "Route not found" })
 })
 
-// Initialize default users and start server
-initializeDefaultUsers().then(() => {
-  const server = app.listen(PORT, "44.226.145.213" () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`)
-    console.log(`💾 Database: MongoDB (${MONGODB_URI})`)
-    console.log("🔗 Test the API: http://localhost:5000/health")
-    console.log("🔐 Authentication endpoints added!")
-    console.log("👤 Default users created (check console for credentials)")
-  })
-  server.keepAliveTimeout = 120000
-  server.headersTimeout = 120000
-})
+// Connect to MongoDB and start server in a clean async flow
+async function startServer() {
+  try {
+    await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB successfully");
+
+    await initializeDefaultUsers();
+
+    const server = app.listen(PORT, () => {
+      console.log(`🚀 Server is running on http://localhost:${PORT}`);
+      console.log(`💾 Database: MongoDB (${MONGODB_URI})`);
+      console.log("🔗 Test the API: http://localhost:5000/health");
+      console.log("🔐 Authentication endpoints added!");
+      console.log("👤 Default users created (check console for credentials)");
+    });
+
+    server.setTimeout(120000);
+    server.keepAliveTimeout = 120000;
+    server.headersTimeout = 120000;
+  } catch (error) {
+    console.error("❌ Failed to connect to MongoDB or start server:", error);
+    process.exit(1);
+  }
+}
+
+// Call the start function
+startServer();
+
