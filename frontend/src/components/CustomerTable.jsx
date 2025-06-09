@@ -85,7 +85,7 @@ const CustomerRow = ({ customer, isNew, isVeryRecent, onEdit, onDelete }) => {
       <td>
         <div className="action-buttons">
           <button className="edit-btn" onClick={() => onEdit(customer)} title="Edit customer">
-            ✏️ Edit
+            ✏�� Edit
           </button>
           <button className="delete-btn" onClick={() => onDelete(customer)} title="Delete customer">
             🗑️ Delete

@@ -1,13 +1,15 @@
 const mongoose = require("mongoose")
 
-// Updated connection options compatible with newer MongoDB driver versions
+// Updated connection options with better error handling
 const connectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-  // Removed: bufferCommands: false,
-  // Removed: bufferMaxEntries: 0,
+  serverSelectionTimeoutMS: 10000, // Increased timeout for Atlas
+  socketTimeoutMS: 45000,
+  connectTimeoutMS: 10000,
+  maxPoolSize: 10, // Maintain up to 10 socket connections
+  minPoolSize: 5, // Maintain a minimum of 5 socket connections
+  maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
 }
 
 let isConnected = false
@@ -19,22 +21,27 @@ const connectDB = async () => {
   }
 
   try {
-    console.log("🔄 Connecting to MongoDB...")
+    console.log("🔄 Connecting to MongoDB Atlas...")
 
     // Check if MONGODB_URI is defined
     if (!process.env.MONGODB_URI) {
       throw new Error("MONGODB_URI environment variable is not defined")
     }
 
+    // Log connection attempt (without showing credentials)
+    const sanitizedUri = process.env.MONGODB_URI.replace(/\/\/.*@/, "//***:***@")
+    console.log(`🔗 Attempting to connect to: ${sanitizedUri}`)
+
     const conn = await mongoose.connect(process.env.MONGODB_URI, connectionOptions)
 
     isConnected = true
-    console.log("✅ Connected to MongoDB successfully")
+    console.log("✅ Connected to MongoDB Atlas successfully")
     console.log(`💾 Database: ${conn.connection.name}`)
+    console.log(`🌐 Host: ${conn.connection.host}`)
 
     // Handle connection events
     mongoose.connection.on("error", (err) => {
-      console.error("❌ MongoDB connection error:", err)
+      console.error("❌ MongoDB connection error:", err.message)
       isConnected = false
     })
 
@@ -51,6 +58,27 @@ const connectDB = async () => {
     return conn
   } catch (error) {
     console.error("❌ Error connecting to MongoDB:", error.message)
+
+    // Provide helpful error messages
+    if (error.message.includes("IP")) {
+      console.log("")
+      console.log("🔧 IP Whitelist Fix:")
+      console.log("1. Go to https://cloud.mongodb.com")
+      console.log("2. Navigate to 'Network Access'")
+      console.log("3. Click 'Add IP Address'")
+      console.log("4. Click 'Add Current IP Address'")
+      console.log("5. Wait 1-2 minutes for changes to apply")
+      console.log("")
+    }
+
+    if (error.message.includes("authentication")) {
+      console.log("")
+      console.log("🔧 Authentication Fix:")
+      console.log("1. Check your username and password in the connection string")
+      console.log("2. Make sure the database user has proper permissions")
+      console.log("")
+    }
+
     isConnected = false
     throw error
   }
