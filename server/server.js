@@ -20,6 +20,7 @@ app.use(express.json())
 // app.options("*", cors())
 // MongoDB connection string
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/customer_dashboard"
+mongoose.set('bufferCommands', false);
 
 // Connect to MongoDB - using the new connection approach
 mongoose
